@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" default-locale="tr-TR">
+  <info>
+    <title>Kocaeli Üniversitesi FBE Tez Kaynak Stili Final</title>
+    <id>http://www.zotero.org/styles/kocaeli-universitesi-fbe-tez-final</id>
+    <link href="http://www.zotero.org/styles/kocaeli-universitesi-fbe-tez-final" rel="self"/>
+    <author>
+      <name>Custom Kocaeli FBE Thesis Style</name>
+    </author>
+    <category citation-format="author-date"/>
+    <category field="engineering"/>
+    <updated>2026-04-27T12:00:00+00:00</updated>
+  </info>
+
+  <locale xml:lang="tr-TR">
+    <terms>
+      <term name="and">ve</term>
+      <term name="et-al">ve diğ.</term>
+      <term name="editor" form="short">Ed.</term>
+      <term name="accessed">Ziyaret tarihi:</term>
+      <term name="no date">t.y.</term>
+    </terms>
+  </locale>
+
+  <macro name="author-short">
+    <names variable="author">
+      <name form="short" and="text" delimiter=", "/>
+      <et-al/>
+      <substitute>
+        <names variable="editor"/>
+        <text variable="title" form="short"/>
+      </substitute>
+    </names>
+  </macro>
+
+  <macro name="author-bib">
+    <names variable="author">
+      <name name-as-sort-order="all" sort-separator=", " initialize-with="." delimiter=", " delimiter-precedes-last="never"/>
+      <substitute>
+        <names variable="editor">
+          <name name-as-sort-order="all" sort-separator=", " initialize-with="." delimiter=", " delimiter-precedes-last="never"/>
+        </names>
+        <text variable="title"/>
+      </substitute>
+    </names>
+  </macro>
+
+  <macro name="year-citation">
+    <choose>
+      <if variable="issued">
+        <date variable="issued">
+          <date-part name="year"/>
+        </date>
+      </if>
+      <else>
+        <text term="no date"/>
+      </else>
+    </choose>
+  </macro>
+
+  <macro name="year-bib">
+    <choose>
+      <if variable="issued">
+        <date variable="issued" prefix=" (" suffix=").">
+          <date-part name="year"/>
+        </date>
+      </if>
+      <else>
+        <text term="no date" prefix=" (" suffix=")."/>
+      </else>
+    </choose>
+  </macro>
+
+  <macro name="access-date">
+    <group prefix="(" suffix=")">
+      <text term="accessed" suffix=" "/>
+      <date variable="accessed">
+        <date-part name="day" suffix=" "/>
+        <date-part name="month" suffix=" "/>
+        <date-part name="year"/>
+      </date>
+    </group>
+  </macro>
+
+  <macro name="edition">
+    <choose>
+      <if variable="edition">
+        <text variable="edition" prefix=" (" suffix=")"/>
+      </if>
+    </choose>
+  </macro>
+
+  <macro name="doi">
+    <choose>
+      <if variable="DOI">
+        <text variable="DOI" prefix=" DOI: "/>
+      </if>
+    </choose>
+  </macro>
+
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" collapse="year">
+    <layout prefix="(" suffix=")" delimiter="; ">
+      <group delimiter=", ">
+        <text macro="author-short"/>
+        <text macro="year-citation"/>
+      </group>
+    </layout>
+  </citation>
+
+  <bibliography hanging-indent="true" entry-spacing="1" line-spacing="1">
+    <sort>
+      <key macro="author-bib"/>
+      <key macro="year-citation"/>
+      <key variable="title"/>
+    </sort>
+
+    <layout suffix=".">
+      <choose>
+
+        <!-- Makale -->
+        <if type="article-journal article-magazine article-newspaper" match="any">
+          <group delimiter=" ">
+            <text macro="author-bib"/>
+            <text macro="year-bib"/>
+            <text variable="title"/>
+          </group>
+          <group delimiter=", " prefix=". ">
+            <text variable="container-title" font-style="italic"/>
+            <group>
+              <text variable="volume" font-style="italic"/>
+              <text variable="issue" prefix="(" suffix=")"/>
+            </group>
+            <text variable="page"/>
+          </group>
+          <text macro="doi" prefix="."/>
+        </if>
+
+        <!-- Kitap -->
+        <else-if type="book" match="any">
+          <group delimiter=" ">
+            <text macro="author-bib"/>
+            <text macro="year-bib"/>
+            <text variable="title" font-style="italic"/>
+            <text macro="edition"/>
+          </group>
+          <group delimiter=": " prefix=". ">
+            <text variable="publisher-place"/>
+            <text variable="publisher"/>
+          </group>
+        </else-if>
+
+        <!-- Kitap Bölümü -->
+        <else-if type="chapter" match="any">
+          <group delimiter=" ">
+            <text macro="author-bib"/>
+            <text macro="year-bib"/>
+            <text variable="title"/>
+          </group>
+          <group prefix=". ">
+            <names variable="editor" suffix=", ">
+              <name name-as-sort-order="all" sort-separator=", " initialize-with="." delimiter=", " delimiter-precedes-last="never"/>
+              <label form="short" prefix=" (" suffix="),"/>
+            </names>
+            <text variable="container-title" font-style="italic"/>
+            <text macro="edition" prefix=" "/>
+            <text value="içinde" prefix=" "/>
+            <text variable="page" prefix=" (" suffix=")"/>
+          </group>
+          <group delimiter=": " prefix=". ">
+            <text variable="publisher-place"/>
+            <text variable="publisher"/>
+          </group>
+        </else-if>
+
+        <!-- Bildiri -->
+        <else-if type="paper-conference" match="any">
+          <group delimiter=" ">
+            <text macro="author-bib"/>
+            <text macro="year-bib"/>
+            <text variable="title"/>
+          </group>
+          <group delimiter=", " prefix=". ">
+            <text variable="container-title" font-style="italic"/>
+            <text variable="publisher-place"/>
+            <choose>
+              <if variable="event-date">
+                <date variable="event-date">
+                  <date-part name="day" suffix=" "/>
+                  <date-part name="month" suffix=" "/>
+                  <date-part name="year"/>
+                </date>
+              </if>
+              <else>
+                <date variable="issued">
+                  <date-part name="day" suffix=" "/>
+                  <date-part name="month" suffix=" "/>
+                  <date-part name="year"/>
+                </date>
+              </else>
+            </choose>
+          </group>
+        </else-if>
+
+        <!-- Tez -->
+        <else-if type="thesis" match="any">
+          <group delimiter=" ">
+            <text macro="author-bib"/>
+            <text macro="year-bib"/>
+            <text variable="title"/>
+          </group>
+          <group delimiter=", " prefix=". ">
+            <text variable="genre"/>
+            <text variable="publisher"/>
+            <text variable="container-title"/>
+            <text variable="publisher-place"/>
+            <text variable="number"/>
+          </group>
+        </else-if>
+
+        <!-- Rapor -->
+        <else-if type="report" match="any">
+          <group delimiter=" ">
+            <text macro="author-bib"/>
+            <text macro="year-bib"/>
+            <text variable="title"/>
+          </group>
+          <group delimiter=", " prefix=". ">
+            <text variable="publisher"/>
+            <text variable="number"/>
+            <text variable="page"/>
+          </group>
+        </else-if>
+
+        <!-- Web -->
+        <else-if type="webpage post-weblog" match="any">
+          <choose>
+            <if variable="author">
+              <group delimiter=" ">
+                <text macro="author-bib"/>
+                <text macro="year-bib"/>
+                <text variable="title"/>
+              </group>
+              <group delimiter=", " prefix=". ">
+                <text variable="publisher"/>
+                <text variable="URL"/>
+                <text macro="access-date"/>
+              </group>
+            </if>
+            <else>
+              <group delimiter=", ">
+                <text variable="URL" prefix="URL-1: "/>
+                <text macro="access-date"/>
+              </group>
+            </else>
+          </choose>
+        </else-if>
+
+        <!-- Patent -->
+        <else-if type="patent" match="any">
+          <group delimiter=" ">
+            <text macro="author-bib"/>
+            <text macro="year-bib"/>
+            <text variable="title"/>
+          </group>
+          <group delimiter=", " prefix=". ">
+            <text variable="number"/>
+            <text variable="publisher-place"/>
+          </group>
+        </else-if>
+
+        <!-- Standart -->
+        <else-if type="standard" match="any">
+          <group delimiter=" ">
+            <text macro="author-bib"/>
+            <text macro="year-bib"/>
+            <text variable="title"/>
+          </group>
+          <text variable="number" prefix=" (" suffix=")"/>
+          <text variable="publisher-place" prefix=". "/>
+        </else-if>
+
+        <!-- Kanun / Yönetmelik / Resmi Gazete -->
+        <else-if type="legislation bill" match="any">
+          <group delimiter=" ">
+            <text variable="title"/>
+            <text macro="year-bib"/>
+          </group>
+          <group prefix=". ">
+            <text value="T.C. Resmi Gazete"/>
+            <group prefix=" (" suffix=")" delimiter=", ">
+              <text variable="number"/>
+              <date variable="issued">
+                <date-part name="day" suffix=" "/>
+                <date-part name="month" suffix=" "/>
+                <date-part name="year"/>
+              </date>
+            </group>
+          </group>
+          <text variable="publisher" prefix=". "/>
+        </else-if>
+
+        <!-- Yedek Format -->
+        <else>
+          <group delimiter=" ">
+            <text macro="author-bib"/>
+            <text macro="year-bib"/>
+            <text variable="title"/>
+          </group>
+          <group delimiter=", " prefix=". ">
+            <text variable="container-title"/>
+            <text variable="publisher"/>
+            <text variable="publisher-place"/>
+            <text variable="number"/>
+            <text variable="page"/>
+            <text variable="URL"/>
+          </group>
+          <text macro="doi" prefix="."/>
+        </else>
+
+      </choose>
+    </layout>
+  </bibliography>
+</style>
