@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" default-locale="tr-TR">
   <info>
-    <title>Kocaeli Üniversitesi FBE Tez Kaynak Stili Final</title>
-    <id>http://www.zotero.org/styles/kocaeli-universitesi-fbe-tez-final</id>
-    <link href="http://www.zotero.org/styles/kocaeli-universitesi-fbe-tez-final" rel="self"/>
+    <title>Kocaeli Üniversitesi FBE Tez Kaynak Stili Final Düzeltilmiş</title>
+    <id>http://www.zotero.org/styles/kocaeli-universitesi-fbe-tez-final-duzeltilmis</id>
+    <link href="http://www.zotero.org/styles/kocaeli-universitesi-fbe-tez-final-duzeltilmis" rel="self"/>
     <author>
       <name>Custom Kocaeli FBE Thesis Style</name>
     </author>
     <category citation-format="author-date"/>
     <category field="engineering"/>
-    <updated>2026-04-27T12:00:00+00:00</updated>
+    <updated>2026-04-28T12:00:00+00:00</updated>
   </info>
 
   <locale xml:lang="tr-TR">
@@ -40,7 +40,7 @@
         <names variable="editor">
           <name name-as-sort-order="all" sort-separator=", " initialize-with="." delimiter=", " delimiter-precedes-last="never"/>
         </names>
-        <text variable="title"/>
+        <text variable="title" text-case="title"/>
       </substitute>
     </names>
   </macro>
@@ -93,7 +93,7 @@
   <macro name="doi">
     <choose>
       <if variable="DOI">
-        <text variable="DOI" prefix=" DOI: "/>
+        <text variable="DOI" prefix="DOI: "/>
       </if>
     </choose>
   </macro>
@@ -117,12 +117,11 @@
     <layout suffix=".">
       <choose>
 
-        <!-- Makale -->
         <if type="article-journal article-magazine article-newspaper" match="any">
           <group delimiter=" ">
             <text macro="author-bib"/>
             <text macro="year-bib"/>
-            <text variable="title"/>
+            <text variable="title" text-case="title"/>
           </group>
           <group delimiter=", " prefix=". ">
             <text variable="container-title" font-style="italic"/>
@@ -132,15 +131,14 @@
             </group>
             <text variable="page"/>
           </group>
-          <text macro="doi" prefix="."/>
+          <text macro="doi" prefix=". "/>
         </if>
 
-        <!-- Kitap -->
         <else-if type="book" match="any">
           <group delimiter=" ">
             <text macro="author-bib"/>
             <text macro="year-bib"/>
-            <text variable="title" font-style="italic"/>
+            <text variable="title" font-style="italic" text-case="title"/>
             <text macro="edition"/>
           </group>
           <group delimiter=": " prefix=". ">
@@ -149,19 +147,18 @@
           </group>
         </else-if>
 
-        <!-- Kitap Bölümü -->
         <else-if type="chapter" match="any">
           <group delimiter=" ">
             <text macro="author-bib"/>
             <text macro="year-bib"/>
-            <text variable="title"/>
+            <text variable="title" text-case="title"/>
           </group>
           <group prefix=". ">
             <names variable="editor" suffix=", ">
               <name name-as-sort-order="all" sort-separator=", " initialize-with="." delimiter=", " delimiter-precedes-last="never"/>
               <label form="short" prefix=" (" suffix="),"/>
             </names>
-            <text variable="container-title" font-style="italic"/>
+            <text variable="container-title" font-style="italic" text-case="title"/>
             <text macro="edition" prefix=" "/>
             <text value="içinde" prefix=" "/>
             <text variable="page" prefix=" (" suffix=")"/>
@@ -172,15 +169,14 @@
           </group>
         </else-if>
 
-        <!-- Bildiri -->
         <else-if type="paper-conference" match="any">
           <group delimiter=" ">
             <text macro="author-bib"/>
             <text macro="year-bib"/>
-            <text variable="title"/>
+            <text variable="title" text-case="title"/>
           </group>
           <group delimiter=", " prefix=". ">
-            <text variable="container-title" font-style="italic"/>
+            <text variable="container-title" font-style="italic" text-case="title"/>
             <text variable="publisher-place"/>
             <choose>
               <if variable="event-date">
@@ -201,12 +197,11 @@
           </group>
         </else-if>
 
-        <!-- Tez -->
         <else-if type="thesis" match="any">
           <group delimiter=" ">
             <text macro="author-bib"/>
             <text macro="year-bib"/>
-            <text variable="title"/>
+            <text variable="title" text-case="title"/>
           </group>
           <group delimiter=", " prefix=". ">
             <text variable="genre"/>
@@ -217,12 +212,11 @@
           </group>
         </else-if>
 
-        <!-- Rapor -->
         <else-if type="report" match="any">
           <group delimiter=" ">
             <text macro="author-bib"/>
             <text macro="year-bib"/>
-            <text variable="title"/>
+            <text variable="title" text-case="title"/>
           </group>
           <group delimiter=", " prefix=". ">
             <text variable="publisher"/>
@@ -231,14 +225,13 @@
           </group>
         </else-if>
 
-        <!-- Web -->
         <else-if type="webpage post-weblog" match="any">
           <choose>
             <if variable="author">
               <group delimiter=" ">
                 <text macro="author-bib"/>
                 <text macro="year-bib"/>
-                <text variable="title"/>
+                <text variable="title" text-case="title"/>
               </group>
               <group delimiter=", " prefix=". ">
                 <text variable="publisher"/>
@@ -255,12 +248,11 @@
           </choose>
         </else-if>
 
-        <!-- Patent -->
         <else-if type="patent" match="any">
           <group delimiter=" ">
             <text macro="author-bib"/>
             <text macro="year-bib"/>
-            <text variable="title"/>
+            <text variable="title" text-case="title"/>
           </group>
           <group delimiter=", " prefix=". ">
             <text variable="number"/>
@@ -268,21 +260,19 @@
           </group>
         </else-if>
 
-        <!-- Standart -->
         <else-if type="standard" match="any">
           <group delimiter=" ">
             <text macro="author-bib"/>
             <text macro="year-bib"/>
-            <text variable="title"/>
+            <text variable="title" text-case="title"/>
           </group>
           <text variable="number" prefix=" (" suffix=")"/>
           <text variable="publisher-place" prefix=". "/>
         </else-if>
 
-        <!-- Kanun / Yönetmelik / Resmi Gazete -->
         <else-if type="legislation bill" match="any">
           <group delimiter=" ">
-            <text variable="title"/>
+            <text variable="title" text-case="title"/>
             <text macro="year-bib"/>
           </group>
           <group prefix=". ">
@@ -299,12 +289,11 @@
           <text variable="publisher" prefix=". "/>
         </else-if>
 
-        <!-- Yedek Format -->
         <else>
           <group delimiter=" ">
             <text macro="author-bib"/>
             <text macro="year-bib"/>
-            <text variable="title"/>
+            <text variable="title" text-case="title"/>
           </group>
           <group delimiter=", " prefix=". ">
             <text variable="container-title"/>
@@ -314,7 +303,7 @@
             <text variable="page"/>
             <text variable="URL"/>
           </group>
-          <text macro="doi" prefix="."/>
+          <text macro="doi" prefix=". "/>
         </else>
 
       </choose>
